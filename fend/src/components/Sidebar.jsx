@@ -1,10 +1,8 @@
 import React from 'react'
 import List from '@mui/material/List';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
 import { Icon } from '@iconify/react';
 import logo from '../public/logo.png'
-
+import Avatar from '@mui/material/Avatar';
 export default function Sidebar() {
     const firstList = {
         NewChat: <Icon icon="carbon:add-filled" width="45" className='custom-red-icon' />,
@@ -18,7 +16,7 @@ export default function Sidebar() {
         <div className='sidebar-container'>
             <div className='first-list' style={{ padding: 0 }}>
                 <div style={{ padding: 0 }}>
-                    <img src={logo} height='30px' alt='Chat App Logo' />
+                    <img className='brandapp' src={logo} height='30px' alt='Chat App Logo' />
                 </div>
                 {Object.keys(firstList).map((icon, idx) => (
                     <div key={idx} className='iconsec'>
@@ -28,10 +26,7 @@ export default function Sidebar() {
             </div>
             <List className='second-list' style={{ padding: 0 }}>
                 <div className='iconsec'>
-                    <ImageIcon />
-                </div>
-                <div>
-                    <WorkIcon />
+                    <Avatar alt='Ricardo Silva' src="/static/images/avatar/1.jpg" className='chat-avatar' />
                 </div>
             </List>
         </div>

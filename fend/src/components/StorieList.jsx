@@ -2,53 +2,60 @@ import React from 'react'
 import Storie from './Storie'
 import TextField from '@mui/material/TextField';
 import ScrollContainer from 'react-indiana-drag-scroll'
+import { styled } from '@mui/material/styles';
 export default function StorieList() {
     const stories = [
         {
             person: 'Ricardo Silva',
             viewed: true
         }, {
-            person: 'Andreia Silva',
+            person: 'David Briceño',
             viewed: true
         }, {
-            person: 'Felps Silva',
+            person: 'João Góis',
             viewed: true
         }, {
-            person: 'Ferreira Silva',
+            person: 'João Ferreira',
             viewed: true
         }, {
-            person: 'Gois Silva',
+            person: 'Pedro Santos',
             viewed: true
         }, {
-            person: 'Yoleida Silva',
+            person: 'Francisco Felix',
             viewed: true
         }, {
-            person: 'Diego Silva',
+            person: 'Andy Gordinho',
             viewed: true
-        },
-        {
-            person: 'Ricardo Silva',
-            viewed: true
-        }, {
-            person: 'Andreia Silva',
-            viewed: true
-        }, {
-            person: 'Felps Silva',
-            viewed: true
-        }, {
-            person: 'Ferreira Silva',
-            viewed: true
-        }, {
-            person: 'Gois Silva',
-            viewed: true
-        }, {
-            person: 'Yoleida Silva',
-            viewed: true
-        }, {
-            person: 'Diego Silva',
-            viewed: true
-        },
+        }
     ]
+
+    const CustomSearchField = styled(TextField)({
+        '& label.Mui-focused': {
+            color: '#ff5252',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#ff5252',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#232323',
+                borderRadius: '10px'
+            },
+            '&:hover fieldset': {
+                borderColor: '#ff5252',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#ff5252',
+            },
+            backgroundColor: '#232323', borderRadius: '10px', color: '#bfbcbc'
+        },
+        '& label': {
+            color: '#bfbcbc',
+        },
+        '& MuiInputBase-input': {
+            color: '#bfbcbc'
+        }
+    });
 
     return (
         <div className='storie-list-container'>
@@ -57,7 +64,12 @@ export default function StorieList() {
                     <Storie str={str} id={idx} key={idx} className='storie' />
                 ))}
             </ScrollContainer>
-            <TextField className='search-input' size='small' label="Search chat" style={{ margin: '20px 35px 20px 20px', width: '-webkit-fill-available' }} />
+            <CustomSearchField
+                className='search-input'
+                size='small'
+                label="Search chat"
+                style={{ margin: '20px 35px 20px 20px', width: '-webkit-fill-available' }}
+            />
         </div>
 
     )
