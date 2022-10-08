@@ -1,0 +1,39 @@
+@media only screen and (max-width: 900px) {
+    .chat-app-container {
+        flex-direction: column;
+    }
+
+    .sidebar-container {
+        flex-direction: row;
+    }
+
+    .storie-section-container {
+        margin-left: 0px;
+    }
+
+    .first-list {
+        flex-direction: row;
+    }
+
+    .second-list {
+        flex-direction: row;
+    }
+
+    .chat-section-container {
+        display: none;
+    }
+
+    .custom-red-icon {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        z-index: 1;
+    }
+
+    .search-input {
+        margin-right: 20px !important;
+    }
+
+}
