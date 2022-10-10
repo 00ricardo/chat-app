@@ -4,9 +4,18 @@ import { Icon } from '@iconify/react';
 export default function NavbarChatSection() {
 
     const menuItems = {
-        bell: <Icon icon="cil:bell" color="#11a5ed" width="30" />,
-        phone: <Icon icon="charm:phone" color="#7cd420" width="30" />,
-        camera: <Icon icon="bi:camera-video" color="#fecb00" width="30" />
+        bell: {
+            icon: <Icon icon="cil:bell" width="30" />,
+            background: '#11a5ed'
+        },
+        phone: {
+            icon: <Icon icon="charm:phone" width="30" />,
+            background: '#7cd420'
+        },
+        camera: {
+            icon: <Icon icon="bi:camera-video" width="30" />,
+            background: '#fecb00'
+        }
     }
     return (
         <div className='navbar-chat-container'>
@@ -20,7 +29,9 @@ export default function NavbarChatSection() {
             <div className='menu-chat'>
                 {Object.keys(menuItems).map((key, idx) => (
                     <div key={idx} className='menu-chat-item'>
-                        {menuItems[key]}
+                        <Avatar key={idx} style={{ background: menuItems[key].background }}>
+                            {menuItems[key].icon}
+                        </Avatar>
                     </div>
                 ))}
             </div>

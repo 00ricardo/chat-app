@@ -47,7 +47,7 @@ export default function StorieList() {
             '&.Mui-focused fieldset': {
                 borderColor: '#ff5252',
             },
-            backgroundColor: '#232323', borderRadius: '10px', color: '#bfbcbc'
+            backgroundColor: '#383a3f', borderRadius: '10px', color: '#bfbcbc'
         },
         '& label': {
             color: '#bfbcbc',
@@ -65,7 +65,6 @@ export default function StorieList() {
                 ))}
             </ScrollContainer>
             <CustomSearchField
-                className='search-input'
                 size='small'
                 label="Search chat"
                 style={{ margin: '20px 35px 20px 20px', width: '-webkit-fill-available' }}
