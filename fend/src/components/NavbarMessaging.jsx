@@ -15,11 +15,13 @@ const options = {
     Photo: <InsertPhotoIcon />,
 }
 
-export default function NavbarMessaging() {
+export default function NavbarMessaging(props) {
+
     const [userOptions, setUserOptions] = useState(null);
     const [emojisAvailable, setEmojisAvailable] = useState(null);
-    const [msg, setMsg] = React.useState('');
-    const [src, setSrc] = React.useState('');
+    const [msg, setMsg] = useState('');
+    const [_src, setSrc] = useState('');
+    const [alt, setAlt] = useState('');
 
     const handleOpenUserMenu = (e) => {
         setUserOptions(e.currentTarget);
@@ -47,56 +49,65 @@ export default function NavbarMessaging() {
 
     const sendMessage = () => {
         const msgs = document.getElementById('messages')
-        const msgContainer = document.createElement('div')
-        const newMessage = document.createElement('p')
-        msgContainer.className = 'msg-to'
-        newMessage.className = 'text-msg me'
 
-        if (msg !== '' && src !== '') {
-            sendImage(msgContainer, newMessage, msgs)
+        if (msg !== '' && _src !== '') {
+            props.setMsgs([...props.msgs, {
+                user: 'Ricardo Silva',
+                messages: [{
+                    img: _src,
+                    timestamp: '17:44'
+                },
+                {
+                    msg: msg,
+                    timestamp: '17:44'
+                }]
+            }])
 
-            //Send Text too, but with a second element
-            const msgContainer2 = document.createElement('div')
-            const newMessage2 = document.createElement('p')
-
-            msgContainer2.className = 'msg-to'
-            newMessage2.className = 'text-msg me'
-
-            newMessage2.innerHTML = msg
-            msgContainer2.appendChild(newMessage2)
-            msgs.appendChild(msgContainer2)
+            //delete temp img
+            document.getElementById('tempimg').remove()
         }
 
-        else if (src !== '') {
-            sendImage(msgContainer, newMessage, msgs)
+        else if (_src !== '') {
+            sendImage()
         }
 
-        else
-            sendText(newMessage, msgContainer, msgs)
+        else if (msg !== '') {
+            sendText()
+        }
+        else {
+            //pass
+        }
 
         setTimeout(() => {
             msgs.scrollTop = msgs.scrollHeight;
             setSrc('')
+            setAlt('')
             setMsg('')
         }, 100)
     }
 
-    const sendImage = (msgContainer, newMessage, msgs) => {
-        const newImage = document.createElement('img')
-        newImage.src = src
-        newImage.style.width = '260px'
-        newMessage.appendChild(newImage)
-        msgContainer.appendChild(newMessage)
-        msgs.appendChild(msgContainer)
+    const sendImage = () => {
+        props.setMsgs([...props.msgs, {
+            user: 'Ricardo Silva',
+            messages: [{
+                img: _src,
+                alt: alt,
+                timestamp: '17:44'
+            }]
+        }])
 
         //delete temp img
         document.getElementById('tempimg').remove()
     }
 
-    const sendText = (newMessage, msgContainer, msgs) => {
-        newMessage.innerHTML = msg
-        msgContainer.appendChild(newMessage)
-        msgs.appendChild(msgContainer)
+    const sendText = () => {
+        props.setMsgs([...props.msgs, {
+            user: 'Ricardo Silva',
+            messages: [{
+                msg: msg,
+                timestamp: '17:44'
+            }]
+        }])
     }
 
     const handleEnter = (e) => {
@@ -108,23 +119,27 @@ export default function NavbarMessaging() {
     const handleFileSelect = function (file) {
         var input = file.target;
         var reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
+
         reader.onload = function () {
             var dataURL = reader.result;
             handleCloseUserMenu()
-            //sendMessage(this, dataURL)
 
             //Show img to send in input
             const showimg = document.getElementById('showimg-tosend')
             const temp = document.createElement('img')
+
             temp.src = dataURL
             temp.style.width = '50px'
             temp.id = 'tempimg'
 
             showimg.appendChild(temp)
-            setSrc(dataURL)
 
+            if (_src === '') {
+                setSrc(dataURL)
+                setAlt(input.files[0].name)
+            }
         };
-        reader.readAsDataURL(input.files[0]);
 
     };
 
@@ -171,7 +186,14 @@ export default function NavbarMessaging() {
                 </div>
                 <div className='send-message'>
                     <div id='showimg-tosend' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: 'fit-content' }} />
-                    <Input value={msg} onChange={handleMessage} onKeyPress={handleEnter} placeholder="Write a message" style={{ width: '-webkit-fill-available' }} />
+                    <Input
+                        inputRef={(focus) => focus?.focus()}
+                        value={msg}
+                        onChange={handleMessage}
+                        onKeyPress={handleEnter}
+                        placeholder="Write a message"
+                        style={{ width: '-webkit-fill-available' }}
+                        autoFocus />
                 </div>
                 <div className='send-icon'>
                     <Button onClick={sendMessage}>

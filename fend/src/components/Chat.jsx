@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavbarMessaging from './NavbarMessaging'
 import $ from 'jquery';
 import birdPhoto from '../public/photo.jpg'
@@ -38,6 +38,7 @@ export default function Chat() {
                 },
                 {
                     img: { birdPhoto },
+                    alt: 'bird.png',
                     timestamp: '17:44'
                 }
             ],
@@ -51,11 +52,14 @@ export default function Chat() {
                 },
                 {
                     img: { birdPhoto },
+                    alt: 'bird.png',
                     timestamp: '17:44'
                 }
             ],
-        },
+        }
     ]
+
+    const [msgs, setMsgs] = useState(messages)
 
     useEffect(() => {
         $(function () {
@@ -70,15 +74,15 @@ export default function Chat() {
     return (
         <div className='chat'>
             <div id='messages' className='messages'>
-                {messages.map((message, i) => (
+                {msgs.map((message, i) => (
                     <div key={i}>
                         {message.user !== 'Ricardo Silva' ?
                             <>
                                 {message.messages.map((msg, idx) => (
                                     <div className='msg-from' key={idx} >
                                         <p className='text-msg'>
-                                            {msg.img ?
-                                                <img className='send-photo' src={birdPhoto} alt='birdPhoto' /> :
+                                            {msg.img && msg.alt ?
+                                                <img className='send-photo' src={msg.img} alt={msg.alt} /> :
                                                 <>{msg.msg}</>
                                             }
                                         </p>
@@ -90,7 +94,7 @@ export default function Chat() {
                                     <div className='msg-to' key={idx}>
                                         <p className='text-msg me'>
                                             {msg.img ?
-                                                <img className='send-photo' src={birdPhoto} alt='birdPhoto' /> :
+                                                <img className='send-photo' src={msg.img} alt={msg.alt} /> :
                                                 <>{msg.msg}</>
                                             }
                                         </p>
@@ -101,7 +105,7 @@ export default function Chat() {
                     </div>
                 ))}
             </div>
-            <NavbarMessaging />
+            <NavbarMessaging msgs={msgs} setMsgs={setMsgs} />
         </div >
     )
 }
