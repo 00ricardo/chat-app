@@ -1,7 +1,8 @@
 import React from 'react'
 import List from '@mui/material/List';
 import Conversation from './Conversation';
-export default function ChatList() {
+import Typography from '@mui/material/Typography';
+export default function ChatList(props) {
 
     const conversations = [
         {
@@ -274,13 +275,20 @@ export default function ChatList() {
             time: '11pm'
         },
     ]
+
     return (
         <>
-            <List className='conversation-list' style={{ width: '100%' }}>
-                {conversations.map((chat, idx) => (
-                    <Conversation chat={chat} id={idx} key={idx} className='conversation' />
-                ))}
-            </List>
+            {conversations.filter(cvst => (cvst.person.toLowerCase()).includes(props.filter.toLowerCase())).length !== 0 ?
+                <List className='conversation-list' style={{ width: '100%', marginTop: '20px' }}>
+                    {conversations.filter(cvst => (cvst.person.toLowerCase()).includes(props.filter.toLowerCase()))
+                        .map((chat, idx) => (
+                            <Conversation chat={chat} id={idx} key={idx} className='conversation' />
+                        ))}
+                </List>
+                : <Typography variant="h4" style={{ height: '-webkit-fill-available', display: 'flex', alignItems: 'center', justifyContent: 'center' }}  >
+                    Chat not found
+                </Typography>
+            }
         </>
     )
 }

@@ -168,9 +168,7 @@ export default function NavbarMessaging(props) {
                             ))}
                         </Dropdown.Menu>
                     </Dropdown>
-
                 </div>
-
                 <div className='send-message'>
                     <div id='showimg-tosend' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: 'fit-content' }} />
                     <Input

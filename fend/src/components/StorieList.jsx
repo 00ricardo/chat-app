@@ -1,9 +1,11 @@
 import React from 'react'
 import Storie from './Storie'
-import TextField from '@mui/material/TextField';
 import ScrollContainer from 'react-indiana-drag-scroll'
-import { styled } from '@mui/material/styles';
-export default function StorieList() {
+import Input from '@mui/material/Input';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+export default function StorieList(props) {
     const stories = [
         {
             person: 'Ricardo Silva',
@@ -29,33 +31,23 @@ export default function StorieList() {
         }
     ]
 
-    const CustomSearchField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: '#ff5252',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: '#ff5252',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: '#232323',
-                borderRadius: '10px'
+    const st = {
+        backgroundColor: '#383a3f',
+        borderRadius: '10px',
+        border: '1px solid #ff5252',
+        color: '#bfbcbc',
+        margin: '20px',
+        width: '-webkit-fill-available',
+    }
+
+    const outerTheme = createTheme({
+        palette: {
+            primary: {
+                main: '#a64a4a00'
             },
-            '&:hover fieldset': {
-                borderColor: '#ff5252',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#ff5252',
-            },
-            backgroundColor: '#383a3f', borderRadius: '10px', color: '#bfbcbc'
         },
-        '& label': {
-            color: '#bfbcbc',
-        },
-        '& MuiInputBase-input': {
-            color: '#bfbcbc'
-        }
     });
+
 
     return (
         <div className='storie-list-container'>
@@ -64,12 +56,16 @@ export default function StorieList() {
                     <Storie str={str} id={idx} key={idx} className='storie' />
                 ))}
             </ScrollContainer>
-            <CustomSearchField
-                size='small'
-                label="Search chat"
-                style={{ margin: '20px 35px 20px 20px', width: '-webkit-fill-available' }}
-            />
-        </div>
+            <ThemeProvider theme={outerTheme}>
+                <Input
+                    onChange={(e) => props.setFilter(e.target.value)}
+                    style={st}
+                    size='small'
+                    placeholder='Search chat'
+                    className='searchat'
+                />
+            </ThemeProvider>
+        </div >
 
     )
 }

@@ -137,6 +137,7 @@ h3 {
     flex-direction: row;
     align-items: center;
     padding: 0;
+    margin-bottom: 20px;
 }
 
 .storie-list-container {
@@ -365,6 +366,7 @@ a:hover {
 
 .send-photo {
     width: 100%;
+    cursor: pointer !important;
 }
 
 .epr-search {
@@ -378,4 +380,15 @@ a:hover {
 .css-mnn31,
 .css-1x51dt5-MuiInputBase-input-MuiInput-input {
     color: var(--white-grey) !important;
+}
+
+.css-nz481w-MuiInputBase-input-MuiInput-input {
+    margin: 8px 10px !important;
+    padding: 0 !important;
+}
+
+.searchat::after,
+.searchat::before {
+    border-bottom: 2px solid transparent !important;
+    padding: 0;
 }
