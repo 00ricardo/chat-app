@@ -174,6 +174,7 @@ export default function NavbarMessaging(props) {
                 <div className='send-message'>
                     <div id='showimg-tosend' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: 'fit-content' }} />
                     <Input
+                        className='writemsg'
                         inputRef={(focus) => focus?.focus()}
                         value={msg}
                         onChange={handleMessage}

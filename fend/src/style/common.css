@@ -280,13 +280,11 @@ h4 {
 }
 
 
-.css-1up7ebe:after:before,
-.css-1up7ebe:after:after {
-    border-bottom: 2px solid var(--red) !important;
+.writemsg:before {
+    border-bottom: 2px solid var(--container-mesage) !important;
 }
 
-.css-1tcs2i1-MuiInputBase-root-MuiInput-root:before,
-.css-1tcs2i1-MuiInputBase-root-MuiInput-root:after {
+.writemsg:after {
     border-bottom: 2px solid var(--red) !important;
 }
 
