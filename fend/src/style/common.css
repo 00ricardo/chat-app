@@ -276,10 +276,6 @@ h4 {
     width: -webkit-fill-available;
 }
 
-.css-1x51dt5-MuiInputBase-input-MuiInput-input {
-    color: var(--white-grey) !important;
-}
-
 a {
     color: transparent !important;
 }
@@ -377,4 +373,9 @@ a:hover {
 
 .dropup .dropdown-toggle::after {
     content: none !important;
+}
+
+.css-mnn31,
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+    color: var(--white-grey) !important;
 }

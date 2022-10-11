@@ -180,7 +180,7 @@ export default function NavbarMessaging(props) {
                         onChange={handleMessage}
                         onKeyPress={handleEnter}
                         placeholder="Write a message"
-                        style={{ width: '-webkit-fill-available' }}
+                        style={{ width: '-webkit-fill-available', colo: 'green !important' }}
                         autoFocus />
                 </div>
                 <div className='send-icon'>
