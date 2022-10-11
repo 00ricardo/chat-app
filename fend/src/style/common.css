@@ -16,6 +16,19 @@
     --epr-category-icon-active-color: var(--red) !important;
 }
 
+.dropdown-menu {
+    --bs-dropdown-bg: transparent !important;
+    --bs-dropdown-border-color: transparent !important;
+    --bs-dropdown-link-hover-bg: transparent !important;
+    color: #ff5252;
+}
+
+
+.btn-secondary {
+    --bs-btn-bg: transparent !important;
+    --bs-btn-border-color: transparent !important;
+}
+
 html,
 body,
 #root {
@@ -351,34 +364,6 @@ h4 {
     border-color: var(--red) !important;
 }
 
-.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
-    top: -100px !important;
-}
-
-.css-1sucic7 {
-    top: -355px !important;
-}
-
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-    background-color: var(--container-mesage) !important;
-}
-
-.css-177ic5c {
-    background-color: var(--container-mesage) !important;
-    top: 485px !important;
-}
-
-.css-1uwgr7b-MuiTypography-root {
-    color: var(--white-grey) !important;
-}
-
-.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
-    color: var(--red) !important;
-}
-
-.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root,
-.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
-    color: var(--red) !important;
-    width: 100% !important;
-    justify-content: flex-start !important;
+.dropup .dropdown-toggle::after {
+    content: none !important;
 }

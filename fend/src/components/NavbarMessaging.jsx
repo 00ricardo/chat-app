@@ -4,12 +4,10 @@ import Input from '@mui/material/Input';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import EmojiPicker from 'emoji-picker-react';
-
+import Dropdown from 'react-bootstrap/Dropdown';
 const options = {
     'Upload a File': <UploadFileIcon />,
     Photo: <InsertPhotoIcon />,
@@ -17,27 +15,9 @@ const options = {
 
 export default function NavbarMessaging(props) {
 
-    const [userOptions, setUserOptions] = useState(null);
-    const [emojisAvailable, setEmojisAvailable] = useState(null);
     const [msg, setMsg] = useState('');
     const [_src, setSrc] = useState('');
     const [alt, setAlt] = useState('');
-
-    const handleOpenUserMenu = (e) => {
-        setUserOptions(e.currentTarget);
-    };
-
-    const handleCloseUserMenu = () => {
-        setUserOptions(null);
-    };
-
-    const handleOpenEmojis = (e) => {
-        setEmojisAvailable(e.currentTarget);
-    };
-
-    const handleCloseEmojis = () => {
-        setEmojisAvailable(null);
-    };
 
     const handleEmojiClick = (emoji) => {
         setMsg((currMsg) => currMsg + emoji.emoji)
@@ -123,7 +103,6 @@ export default function NavbarMessaging(props) {
 
         reader.onload = function () {
             var dataURL = reader.result;
-            handleCloseUserMenu()
 
             //Show img to send in input
             const showimg = document.getElementById('showimg-tosend')
@@ -140,50 +119,58 @@ export default function NavbarMessaging(props) {
                 setAlt(input.files[0].name)
             }
         };
-
     };
+
+    const HandleSecondDropwdown = (key) => {
+        let hiddenInput = document.getElementById(`selectedFile-${key}`)
+        hiddenInput.click()
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div className='shadow-divider' />
             <div className='navbar-messaging'>
-                <div>
-                    <Menu className='emoji-menu' anchorEl={emojisAvailable} open={Boolean(emojisAvailable)} onClose={handleCloseEmojis}>
-                        <MenuItem>
-                            <EmojiPicker
-                                theme='dark'
-                                onEmojiClick={handleEmojiClick}
-                                height={450}
-                                width={300}
-                                style={{ backgroundColor: 'transparent' }}
-                            />
-                        </MenuItem>
-                    </Menu>
-                </div>
                 <div className='send-options'>
-                    <Button style={{ padding: 0 }}>
-                        <Avatar style={{ background: '#fecb00', marginRight: '10px' }}>
-                            <Icon onClick={handleOpenEmojis} icon="iconoir:emoji" width="30" style={{ width: '50px' }} />
-                        </Avatar>
-                    </Button>
-                    <Button style={{ padding: 0 }}>
-                        <Avatar style={{ background: '#11a5ed' }}>
-                            <Icon onClick={handleOpenUserMenu} icon="ant-design:plus-circle-outlined" width="30" style={{ width: '50px' }} />
-                        </Avatar>
-                    </Button>
-                    <div>
-                        <Menu anchorEl={userOptions} open={Boolean(userOptions)} onClose={handleCloseUserMenu}>
+                    <Dropdown className="d-inline mx-2" autoClose="outside" drop='up' variant="secondary">
+                        <Dropdown.Toggle id="dropdown-autoclose-outside" variant="secondary">
+                            <Avatar style={{ background: '#fecb00' }}>
+                                <Icon icon="iconoir:emoji" width="30" style={{ width: '50px' }} />
+                            </Avatar>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item >
+                                <EmojiPicker
+                                    theme='dark'
+                                    onEmojiClick={handleEmojiClick}
+                                    height={450}
+                                    width={300}
+                                    style={{ backgroundColor: 'transparent' }}
+                                />
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown className="d-inline mx-2" autoClose="outside" drop='up' variant="secondary">
+                        <Dropdown.Toggle id="dropdown-autoclose-outside" variant="secondary">
+                            <Avatar style={{ background: '#11a5ed' }}>
+                                <Icon icon="ant-design:plus-circle-outlined" width="30" style={{ width: '50px' }} />
+                            </Avatar>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
                             {Object.keys(options).map((key) => (
-                                <MenuItem key={key} >
-                                    <Button component="label">
-                                        <Typography textAlign="center"> {options[key]} {key}</Typography>
-                                        <input hidden accept="image/*" type="file" id='selectedFile' onChange={handleFileSelect} />
-                                    </Button>
-                                </MenuItem>
+                                <div key={key}>
+                                    <Dropdown.Item style={{ background: '#202124' }} key={key}>
+                                        <Button component="label" style={{ color: '#ffffffbf', fontSize: '10px' }} onClick={() => HandleSecondDropwdown(key)}>
+                                            <Typography textAlign="center" style={{ fontSize: '13px' }}>{options[key]} {key}</Typography>
+                                        </Button>
+                                    </Dropdown.Item>
+                                    <input hidden accept="image/*" type="file" id={`selectedFile-${key}`} onChange={handleFileSelect} key={key} />
+                                </div>
                             ))}
-                        </Menu>
-                    </div>
+                        </Dropdown.Menu>
+                    </Dropdown>
+
                 </div>
+
                 <div className='send-message'>
                     <div id='showimg-tosend' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: 'fit-content' }} />
                     <Input
@@ -201,6 +188,6 @@ export default function NavbarMessaging(props) {
                     </Button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
