@@ -20,6 +20,7 @@
     --bs-dropdown-bg: transparent !important;
     --bs-dropdown-border-color: transparent !important;
     --bs-dropdown-link-hover-bg: transparent !important;
+    --bs-dropdown-link-active-bg: transparent !important;
     color: #ff5252;
 }
 
@@ -279,6 +280,18 @@ h4 {
     color: var(--white-grey) !important;
 }
 
+a {
+    color: transparent !important;
+}
+
+a:hover {
+    color: var(--red) !important;
+}
+
+
+.writemsg {
+    color: var(--container-mesage);
+}
 
 .writemsg:before {
     border-bottom: 2px solid var(--container-mesage) !important;
