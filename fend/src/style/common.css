@@ -382,7 +382,8 @@ a:hover {
     color: var(--white-grey) !important;
 }
 
-.css-nz481w-MuiInputBase-input-MuiInput-input {
+.css-nz481w-MuiInputBase-input-MuiInput-input,
+.css-2duac4 {
     margin: 8px 10px !important;
     padding: 0 !important;
 }
