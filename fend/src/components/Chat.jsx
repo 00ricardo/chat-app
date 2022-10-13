@@ -1,68 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import NavbarMessaging from './NavbarMessaging'
-import birdPhoto from '../public/photo.jpg'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 
-export default function Chat() {
-    const messages = [
-        {
-            user: 'Andreia Farinha',
-            messages: [
-                {
-                    msg: 'Olá Ricardo, tudo bem?',
-                    timestamp: '17:39'
-                }],
-        },
-        {
-            user: 'Ricardo Silva',
-            messages: [
-                {
-                    msg: 'Olá Andreia, está tudo bem e contigo?',
-                    timestamp: '17:41'
-                },
-                {
-                    msg: 'Esperei pela tua mensagem o dia inteiro :)',
-                    timestamp: '17:41'
-                },
-            ],
-        },
-        {
-            user: 'Andreia Farinha',
-            messages: [
-                {
-                    msg: 'Só consegui um tempinho agora... Mas já aqui estou :)',
-                    timestamp: '17:43'
-                }, {
-                    msg: 'Como foi o teu dia?',
-                    timestamp: '17:43'
-                },
-                {
-                    img: { birdPhoto },
-                    alt: 'bird.png',
-                    timestamp: '17:44'
-                }
-            ],
-        },
-        {
-            user: 'Ricardo Silva',
-            messages: [
-                {
-                    msg: 'Normal e o teu?',
-                    timestamp: '17:44'
-                },
-                {
-                    img: { birdPhoto },
-                    alt: 'bird.png',
-                    timestamp: '17:44'
-                }
-            ],
-        }
-    ]
+import { useSelector } from 'react-redux';
 
-    const [msgs, setMsgs] = useState(messages)
+export default function Chat() {
+
+    const { messages } = useSelector((state) => state.chat)
+    const msgs = messages ? messages : []
+
     const [openModal, setOpenModal] = useState(false);
     const [imgOpenSrc, setImgOpenSrc] = useState('');
     const [imgOpenAlt, setImgOpenAlt] = useState('');
@@ -71,14 +20,9 @@ export default function Chat() {
         setImgOpenSrc(src)
         setImgOpenAlt(alt)
         setOpenModal(true);
-        /*  document.body.style.filter = 'blur(8px)'
-          let modal = document.getElementById('modal-box')
-          modal.style.filter = 'blur(0px)'
-          modal.style.zIndex = 1000*/
     }
     const handleClose = () => {
         setOpenModal(false);
-        // document.body.style.filter = 'blur(0px)'
     }
 
     const style = {
@@ -109,7 +53,7 @@ export default function Chat() {
                                     <div className='msg-from' key={idx} >
                                         <p className='text-msg'>
                                             {msg.img && msg.alt ?
-                                                <img className='send-photo' src={msg.img} alt={msg.alt} onClick={handleOpen} /> :
+                                                <img className='send-photo' src={msg.img} alt={msg.alt} onClick={() => handleOpen(msg.img, msg.alt)} /> :
                                                 <>{msg.msg}</>
                                             }
                                         </p>
@@ -146,7 +90,7 @@ export default function Chat() {
                     </Box>
                 </Fade>
             </Modal>
-            <NavbarMessaging msgs={msgs} setMsgs={setMsgs} />
+            <NavbarMessaging />
         </div >
     )
 }

@@ -4,16 +4,20 @@ import { Icon } from '@iconify/react';
 import logo from '../public/logo.png'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import { useState } from 'react';
-export default function Sidebar() {
 
-    const [sectionSelected, setSectionSelected] = useState('Chats')
+import { useSelector, useDispatch } from 'react-redux';
+import { thunkSectionSelected } from '../redux/services/sectionServices'
+
+export default function Sidebar() {
+    const { section } = useSelector((state) => state.section)
+    const dispatch = useDispatch()
+
     const firstList = {
         NewChat: <Icon icon="carbon:add-filled" width="45" className='custom-red-default-icon pulse' />,
-        Chats: <Icon icon="bi:chat" width="25" className={`${sectionSelected === 'Chats' ? 'custom-red-icon' : 'custom-grey-icon'} chat-icon`} />,
-        Profile: <Icon icon="carbon:user" width="25" className={`${sectionSelected === 'Profile' ? 'custom-red-icon' : 'custom-grey-icon'} profile-icon`} />,
-        Favs: <Icon icon="clarity:favorite-line" width="25" className={`${sectionSelected === 'Favs' ? 'custom-red-icon' : 'custom-grey-icon'} fav-icon`} />,
-        Store: <Icon icon="clarity:store-line" width="25" className={`${sectionSelected === 'Store' ? 'custom-red-icon' : 'custom-grey-icon'} store-icon`} />,
+        Chats: <Icon icon="bi:chat" width="25" className={`${section === 'Chats' ? 'custom-red-icon' : 'custom-grey-icon'} chat-icon`} />,
+        Profile: <Icon icon="carbon:user" width="25" className={`${section === 'Profile' ? 'custom-red-icon' : 'custom-grey-icon'} profile-icon`} />,
+        Favs: <Icon icon="clarity:favorite-line" width="25" className={`${section === 'Favs' ? 'custom-red-icon' : 'custom-grey-icon'} fav-icon`} />,
+        Store: <Icon icon="clarity:store-line" width="25" className={`${section === 'Store' ? 'custom-red-icon' : 'custom-grey-icon'} store-icon`} />,
     }
 
     const btnStyle = {
@@ -25,6 +29,10 @@ export default function Sidebar() {
         left: '-10px'
     }
 
+    const selectedSection = (icon) => {
+        dispatch(thunkSectionSelected(icon))
+    }
+
     return (
         <div className='sidebar-container'>
             <div className='first-list' style={{ padding: 0 }}>
@@ -34,9 +42,9 @@ export default function Sidebar() {
                 {Object.keys(firstList).map((icon, idx) => (
                     <div key={idx} className='iconsec'>
                         <Button variant="text"
-                            onClick={() => setSectionSelected(icon)}
+                            onClick={() => selectedSection(icon)}
                             style={btnStyle}
-                            className={sectionSelected === icon && icon !== 'NewChat' ? 'active' : ''}>
+                            className={section === icon && icon !== 'NewChat' ? 'active' : ''}>
                             {firstList[icon]}
                         </Button>
                     </div>
@@ -47,7 +55,7 @@ export default function Sidebar() {
                     <Avatar alt='Ricardo Silva' src="/static/images/avatar/1.jpg" className='chat-avatar' />
                 </div>
             </List>
-        </div>
+        </div >
 
     )
 }

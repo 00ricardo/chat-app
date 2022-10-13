@@ -8,6 +8,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import EmojiPicker from 'emoji-picker-react';
 import Dropdown from 'react-bootstrap/Dropdown';
+
 const options = {
     'Upload a File': <UploadFileIcon />,
     Photo: <InsertPhotoIcon />,
