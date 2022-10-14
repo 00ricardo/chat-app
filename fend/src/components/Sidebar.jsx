@@ -51,7 +51,7 @@ export default function Sidebar() {
                 ))}
             </div>
             <List className='second-list' style={{ padding: 0 }}>
-                <div className='iconsec'>
+                <div className='iconsec' style={{ position: 'relative', left: '-10px' }}>
                     <Avatar alt='Ricardo Silva' src="/static/images/avatar/1.jpg" className='chat-avatar' />
                 </div>
             </List>

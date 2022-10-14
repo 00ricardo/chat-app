@@ -48,30 +48,23 @@ export default function Chat() {
                 {msgs.map((message, i) => (
                     <div key={i}>
                         {message.user !== 'Ricardo Silva' ?
-                            <>
-                                {message.messages.map((msg, idx) => (
-                                    <div className='msg-from' key={idx} >
-                                        <p className='text-msg'>
-                                            {msg.img && msg.alt ?
-                                                <img className='send-photo' src={msg.img} alt={msg.alt} onClick={() => handleOpen(msg.img, msg.alt)} /> :
-                                                <>{msg.msg}</>
-                                            }
-                                        </p>
-                                    </div>
-                                ))}
-                            </> :
-                            <>
-                                {message.messages.map((msg, idx) => (
-                                    <div className='msg-to' key={idx}>
-                                        <p className='text-msg me'>
-                                            {msg.img ?
-                                                <img className='send-photo' src={msg.img} alt={msg.alt} onClick={() => handleOpen(msg.img, msg.alt)} /> :
-                                                <>{msg.msg}</>
-                                            }
-                                        </p>
-                                    </div>
-                                ))}
-                            </>
+                            <div className='msg-from' >
+                                <p className='text-msg'>
+                                    {message.img && message.alt ?
+                                        <img className='send-photo' src={message.img} alt={message.alt} onClick={() => handleOpen(message.img, message.alt)} /> :
+                                        <>{message.msg}</>
+                                    }
+                                </p>
+                            </div>
+                            :
+                            <div className='msg-to'>
+                                <p className='text-msg me'>
+                                    {message.img ?
+                                        <img className='send-photo' src={message.img} alt={message.alt} onClick={() => handleOpen(message.img, message.alt)} /> :
+                                        <>{message.msg}</>
+                                    }
+                                </p>
+                            </div>
                         }
                     </div>
                 ))}

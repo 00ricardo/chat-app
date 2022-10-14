@@ -9,12 +9,18 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import EmojiPicker from 'emoji-picker-react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { thunkSendMessage } from '../redux/services/chatServices'
+
 const options = {
     'Upload a File': <UploadFileIcon />,
     Photo: <InsertPhotoIcon />,
 }
 
 export default function NavbarMessaging(props) {
+
+    const { messages, chatID } = useSelector((state) => state.chat)
+    const dispatch = useDispatch()
 
     const [msg, setMsg] = useState('');
     const [_src, setSrc] = useState('');
@@ -32,18 +38,20 @@ export default function NavbarMessaging(props) {
         const msgs = document.getElementById('messages')
 
         if (msg !== '' && _src !== '') {
-            props.setMsgs([...props.msgs, {
-                user: 'Ricardo Silva',
-                messages: [{
+            dispatch(thunkSendMessage({
+                chatID: chatID,
+                messages: [...messages, {
+                    user: 'Ricardo Silva',
                     img: _src,
+                    alt: alt,
                     timestamp: '17:44'
                 },
                 {
+                    user: 'Ricardo Silva',
                     msg: msg,
                     timestamp: '17:44'
                 }]
-            }])
-
+            }))
             //delete temp img
             document.getElementById('tempimg').remove()
         }
@@ -68,27 +76,29 @@ export default function NavbarMessaging(props) {
     }
 
     const sendImage = () => {
-        props.setMsgs([...props.msgs, {
-            user: 'Ricardo Silva',
-            messages: [{
+        dispatch(thunkSendMessage({
+            chatID: chatID,
+            messages: [...messages, {
+                user: 'Ricardo Silva',
                 img: _src,
                 alt: alt,
                 timestamp: '17:44'
             }]
-        }])
+        }))
 
         //delete temp img
         document.getElementById('tempimg').remove()
     }
 
     const sendText = () => {
-        props.setMsgs([...props.msgs, {
-            user: 'Ricardo Silva',
-            messages: [{
+        dispatch(thunkSendMessage({
+            chatID: chatID,
+            messages: [...messages, {
+                user: 'Ricardo Silva',
                 msg: msg,
                 timestamp: '17:44'
             }]
-        }])
+        }))
     }
 
     const handleEnter = (e) => {
@@ -129,6 +139,7 @@ export default function NavbarMessaging(props) {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {msg}
             <div className='shadow-divider' />
             <div className='navbar-messaging'>
                 <div className='send-options'>

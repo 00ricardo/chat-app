@@ -4,7 +4,6 @@ import { thunkFetchConversation, thunkSendMessage, resetState, thunkGetChatID } 
 const initialState = {
     chatID: null,
     messages: [],
-    sendMessage: ''
 }
 
 export const chatSlice = createSlice({
@@ -18,46 +17,41 @@ export const chatSlice = createSlice({
             //Chat itself
             .addCase(thunkGetChatID.pending, (state) => {
                 state.chatID = null
-                state.messages = ''
-                state.sendMessage = ''
+                state.messages = []
             })
             .addCase(thunkGetChatID.fulfilled, (state, action) => {
                 state.chatID = action.payload
             })
             .addCase(thunkGetChatID.rejected, (state) => {
                 state.chatID = null
-                state.messages = ''
-                state.sendMessage = ''
+                state.messages = []
             })
 
 
             //Conversation
             .addCase(thunkFetchConversation.pending, (state) => {
                 state.chatID = null
-                state.messages = ''
+                state.messages = []
             })
             .addCase(thunkFetchConversation.fulfilled, (state, action) => {
                 state.messages = action.payload
             })
             .addCase(thunkFetchConversation.rejected, (state) => {
                 state.chatID = null
-                state.messages = ''
+                state.messages = []
             })
 
             //Messages
             .addCase(thunkSendMessage.pending, (state) => {
                 state.chatID = null
-                state.messages = ''
-                state.sendMessage = ''
             })
             .addCase(thunkSendMessage.fulfilled, (state, action) => {
                 state.chatID = action.payload.chatID
-                state.sendMessage = action.payload.sendMessage
+                state.messages = action.payload.messages
             })
             .addCase(thunkSendMessage.rejected, (state) => {
                 state.chatID = null
-                state.messages = ''
-                state.sendMessage = ''
+                state.messages = []
             })
     }
 })
