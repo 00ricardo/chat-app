@@ -139,7 +139,6 @@ export default function NavbarMessaging(props) {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {msg}
             <div className='shadow-divider' />
             <div className='navbar-messaging'>
                 <div className='send-options'>

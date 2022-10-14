@@ -48,8 +48,8 @@ export default function Chat() {
                 {msgs.map((message, i) => (
                     <div key={i}>
                         {message.user !== 'Ricardo Silva' ?
-                            <div className='msg-from' >
-                                <p className='text-msg'>
+                            <div className='msg-from'>
+                                <p className={`text-msg ${(i + 1) === msgs.length ? 'animate__animated animate__fadeInRight' : ''}`}>
                                     {message.img && message.alt ?
                                         <img className='send-photo' src={message.img} alt={message.alt} onClick={() => handleOpen(message.img, message.alt)} /> :
                                         <>{message.msg}</>
@@ -58,7 +58,7 @@ export default function Chat() {
                             </div>
                             :
                             <div className='msg-to'>
-                                <p className='text-msg me'>
+                                <p className={`text-msg me ${(i + 1) === msgs.length ? 'animate__animated animate__fadeInLeft' : ''}`}>
                                     {message.img ?
                                         <img className='send-photo' src={message.img} alt={message.alt} onClick={() => handleOpen(message.img, message.alt)} /> :
                                         <>{message.msg}</>

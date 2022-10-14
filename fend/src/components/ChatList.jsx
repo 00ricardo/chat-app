@@ -9,7 +9,7 @@ import { thunkFetchChatList } from '../redux/services/chatListServices'
 
 
 export default function ChatList(props) {
-    const { chatList } = useSelector((state) => state.chatList)
+    const { chatList } = useSelector((state) => state.conversations)
 
     const dispatch = useDispatch()
     useEffect(() => {

@@ -8,6 +8,7 @@
     --white: #fff;
     --red: #ff5252;
     --online: #40d11f;
+    --opened: #5a5151;
     --container-mesage: #50535a;
     --epr-highlight-color: var(--red) !important;
     --epr-emoji-gap: var(--red) !important;
@@ -159,9 +160,10 @@ h3 {
     padding: 0 !important;
 }
 
-.storie-avatar {
-    margin-bottom: 10px;
+.storie-user {
+    margin-top: 10px;
 }
+
 
 .storie-user,
 .chat-user,
@@ -329,6 +331,7 @@ a:hover {
     overflow-x: hidden;
     color: rgba(0, 0, 0, 0);
     transition: color .3s ease;
+    margin-top: 15px;
 }
 
 .shadow-divider {
@@ -431,4 +434,26 @@ a:hover {
 
 .active {
     background-color: var(--light-grey) !important;
+}
+
+.new-story {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+}
+
+.opened-story {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid var(--opened);
+    border-radius: 50%;
 }

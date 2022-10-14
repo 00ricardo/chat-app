@@ -9,7 +9,7 @@ import { thunkFetchStorieList } from '../redux/services/storieListServices'
 
 export default function StorieList(props) {
 
-    const { storieList } = useSelector((state) => state.storieList)
+    const { storieList } = useSelector((state) => state.stories)
     const dispatch = useDispatch()
 
     useEffect(() => {

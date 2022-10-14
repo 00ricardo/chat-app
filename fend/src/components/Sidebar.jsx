@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { thunkSectionSelected } from '../redux/services/sectionServices'
 
 export default function Sidebar() {
-    const { section } = useSelector((state) => state.section)
+    const { section } = useSelector((state) => state.sidebar)
     const dispatch = useDispatch()
 
     const firstList = {
@@ -37,7 +37,9 @@ export default function Sidebar() {
         <div className='sidebar-container'>
             <div className='first-list' style={{ padding: 0 }}>
                 <div style={{ padding: 0 }}>
-                    <img className='brandapp' src={logo} height='30px' alt='Chat App Logo' />
+                    <a href='/'>
+                        <img className='brandapp' src={logo} height='30px' alt='Chat App Logo' />
+                    </a>
                 </div>
                 {Object.keys(firstList).map((icon, idx) => (
                     <div key={idx} className='iconsec'>

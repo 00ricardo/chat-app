@@ -6,8 +6,8 @@ import chatReducer from './chatReducer'
 
 // get all reducers together (state : value)
 export default combineReducers({
-    chatList: chatListReducer,
-    storieList: storieListReducer,
-    section: sectionReducer,
+    conversations: chatListReducer,
+    stories: storieListReducer,
+    sidebar: sectionReducer,
     chat: chatReducer
 })

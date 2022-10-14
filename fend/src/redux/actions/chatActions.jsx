@@ -42,7 +42,11 @@ const fetchChatMessages = async (state) => {
                 user: 'Ricardo Silva',
                 msg: 'Dracarysss',
                 timestamp: '17:39'
-            }
+            }, {
+                user: 'Andreia Farinha',
+                msg: 'Good King though',
+                timestamp: '17:39'
+            },
         ]
         return messages
     } else {
