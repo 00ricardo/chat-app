@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { thunkFetchConversation, thunkSendMessage, resetState, thunkGetChatID } from '../services/chatServices';
 
 const initialState = {
-    chatID: null,
+    chatID: 0,
     messages: [],
 }
 
@@ -17,33 +17,30 @@ export const chatSlice = createSlice({
             //Chat itself
             .addCase(thunkGetChatID.pending, (state) => {
                 state.chatID = null
-                state.messages = []
             })
             .addCase(thunkGetChatID.fulfilled, (state, action) => {
                 state.chatID = action.payload
             })
             .addCase(thunkGetChatID.rejected, (state) => {
                 state.chatID = null
-                state.messages = []
             })
 
 
             //Conversation
             .addCase(thunkFetchConversation.pending, (state) => {
-                state.chatID = null
                 state.messages = []
             })
             .addCase(thunkFetchConversation.fulfilled, (state, action) => {
                 state.messages = action.payload
             })
             .addCase(thunkFetchConversation.rejected, (state) => {
-                state.chatID = null
                 state.messages = []
             })
 
             //Messages
             .addCase(thunkSendMessage.pending, (state) => {
                 state.chatID = null
+                state.messages = []
             })
             .addCase(thunkSendMessage.fulfilled, (state, action) => {
                 state.chatID = action.payload.chatID

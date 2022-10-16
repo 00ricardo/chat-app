@@ -40,7 +40,7 @@ export default function Chat() {
             const lastMessage = document.getElementById('messages')
             lastMessage.scrollTop = lastMessage.scrollHeight;
         }, 100)
-    }, [])
+    }, [messages])
 
     return (
         <div className='chat'>

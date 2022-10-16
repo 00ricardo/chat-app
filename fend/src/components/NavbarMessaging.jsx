@@ -34,8 +34,16 @@ export default function NavbarMessaging(props) {
         setMsg(e.target.value);
     }
 
+    const d = new Date();
+
+
     const sendMessage = () => {
         const msgs = document.getElementById('messages')
+
+
+        let hour = d.getUTCHours()
+        let minutes = d.getUTCMinutes();
+        let timestamp = `${hour}:${minutes}`
 
         if (msg !== '' && _src !== '') {
             dispatch(thunkSendMessage({
@@ -44,12 +52,12 @@ export default function NavbarMessaging(props) {
                     user: 'Ricardo Silva',
                     img: _src,
                     alt: alt,
-                    timestamp: '17:44'
+                    timestamp: timestamp
                 },
                 {
                     user: 'Ricardo Silva',
                     msg: msg,
-                    timestamp: '17:44'
+                    timestamp: timestamp
                 }]
             }))
             //delete temp img
@@ -76,13 +84,18 @@ export default function NavbarMessaging(props) {
     }
 
     const sendImage = () => {
+
+        let hour = d.getUTCHours()
+        let minutes = d.getUTCMinutes();
+        let timestamp = `${hour}:${minutes}`
+
         dispatch(thunkSendMessage({
             chatID: chatID,
             messages: [...messages, {
                 user: 'Ricardo Silva',
                 img: _src,
                 alt: alt,
-                timestamp: '17:44'
+                timestamp: timestamp
             }]
         }))
 
@@ -91,12 +104,17 @@ export default function NavbarMessaging(props) {
     }
 
     const sendText = () => {
+
+        let hour = d.getUTCHours()
+        let minutes = d.getUTCMinutes();
+        let timestamp = `${hour}:${minutes}`
+
         dispatch(thunkSendMessage({
             chatID: chatID,
             messages: [...messages, {
                 user: 'Ricardo Silva',
                 msg: msg,
-                timestamp: '17:44'
+                timestamp: timestamp
             }]
         }))
     }

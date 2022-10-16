@@ -34,7 +34,7 @@ export default function StorieList(props) {
         },
     });
 
-    const click = async (id, str) => {
+    const openModal = async (id, str) => {
         let name = str.person
 
         $.fn.iziModal = iziModal;
@@ -56,8 +56,6 @@ export default function StorieList(props) {
                     <img class='strphotostr' src=${s.img} alt=${s.alt}></img>
                 </div>`
             );
-
-
         })
 
         var indexToShow = 0
@@ -77,6 +75,25 @@ export default function StorieList(props) {
             }
         }
 
+
+        $(document).on('iziModal-group-change', function (e, modal) {
+            let outid = modal.out.id
+            let gp = modal.out.group
+            let modalIndex = gp.ids.indexOf(outid)
+
+            console.log(modalIndex)
+
+            indexToShow = modalIndex
+            if (modalIndex + 2 === gp.ids.length) {
+                dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow })) // one more story viewed
+                dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow + 1 })) //last story -> force to 
+                dispatch(thunkSetUserStoryVision({ userID: id })) //complete proccess
+                indexToShow = 0
+            } else {
+                dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow })) // one more story viewed
+            }
+        });
+
         $(`#modal-${id}-${name}-${str.stories[indexToShow].alt}`).iziModal('open')
 
     }
@@ -88,7 +105,7 @@ export default function StorieList(props) {
             <ScrollContainer className=" storie-list scroll-container">
                 {storieList.map((str, idx) => (
                     <div key={idx}>
-                        <Storie str={str} id={idx} className='storie' openModal={() => click(idx, str)} />
+                        <Storie str={str} id={idx} className='storie' openModal={() => openModal(idx, str)} />
                         {str.stories.map((s, i) => (
                             <div key={i}
                                 id={`modal-${idx}-${str.person}-${s.alt}`}
