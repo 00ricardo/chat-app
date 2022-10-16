@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { thunkFetchStorieList, resetState } from '../services/storieListServices';
+import {
+    thunkFetchStorieList, resetState,
+    thunkSetStoryVision, thunkSetUserStoryVision
+} from '../services/storieListServices';
 
 const initialState = {
-    storieList: []
+    storieList: [],
 }
 
 export const storieListSlice = createSlice({
@@ -13,6 +16,8 @@ export const storieListSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            //Fetch Story List
             .addCase(thunkFetchStorieList.pending, (state) => {
                 state.storieList = []
             })
@@ -22,6 +27,35 @@ export const storieListSlice = createSlice({
             .addCase(thunkFetchStorieList.rejected, (state, action) => {
                 state.storieList = []
             })
+
+            //Set Story Vision
+            .addCase(thunkSetStoryVision.pending, (state) => {
+                //state.storieList = []
+            })
+            .addCase(thunkSetStoryVision.fulfilled, (state, action) => {
+                let { userID, storyID } = action.payload
+                let userStories = state.storieList[userID].stories
+                userStories[storyID].viewed = true
+            })
+            .addCase(thunkSetStoryVision.rejected, (state, action) => {
+                //state.storieList = []
+            })
+
+
+            //Set User Story Vision
+            .addCase(thunkSetUserStoryVision.pending, (state) => {
+                //state.storieList = []
+            })
+            .addCase(thunkSetUserStoryVision.fulfilled, (state, action) => {
+                let { userID } = action.payload
+                let userStr = state.storieList
+                userStr[userID].viewed = true
+            })
+            .addCase(thunkSetUserStoryVision.rejected, (state, action) => {
+                //state.storieList = []
+            })
+
+
     }
 })
 

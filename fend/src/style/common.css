@@ -457,3 +457,24 @@ a:hover {
     border: 2px solid var(--opened);
     border-radius: 50%;
 }
+
+.kilo {
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    height: 500px;
+
+}
+
+.iziModal,
+.iziModal-wrap,
+.iziModal .iziModal-content {
+    max-height: 500px !important;
+    max-width: 600px !important;
+    height: auto !important;
+}
+
+.strphotostr {
+    width: 100% !important;
+    height: 100% !important;
+}

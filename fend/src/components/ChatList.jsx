@@ -16,7 +16,6 @@ export default function ChatList(props) {
         dispatch(thunkFetchChatList())
     }, [dispatch])
 
-
     return (
         <>
             {chatList.filter(cvst => (cvst.person.toLowerCase()).includes(props.filter.toLowerCase())).length !== 0 ?
@@ -32,7 +31,6 @@ export default function ChatList(props) {
             }
         </>
     )
-
 }
 
 
