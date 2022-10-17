@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import Storie from './Storie'
 import ScrollContainer from 'react-indiana-drag-scroll'
-import Input from '@mui/material/Input';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkFetchStorieList, thunkSetStoryVision, thunkSetUserStoryVision } from '../redux/services/storieListServices'
 import $ from 'jquery'
@@ -16,23 +14,6 @@ export default function StorieList(props) {
     useEffect(() => {
         dispatch(thunkFetchStorieList())
     }, [dispatch])
-
-    const st = {
-        backgroundColor: '#383a3f',
-        borderRadius: '10px',
-        border: '1px solid #ff5252',
-        color: '#bfbcbc',
-        margin: '20px',
-        width: '-webkit-fill-available',
-    }
-
-    const outerTheme = createTheme({
-        palette: {
-            primary: {
-                main: '#a64a4a00'
-            },
-        },
-    });
 
     const openModal = async (id, str) => {
         let name = str.person
@@ -101,31 +82,21 @@ export default function StorieList(props) {
 
 
     return (
-        <div className='storie-list-container'>
-            <ScrollContainer className=" storie-list scroll-container">
-                {storieList.map((str, idx) => (
-                    <div key={idx}>
-                        <Storie str={str} id={idx} className='storie' openModal={() => openModal(idx, str)} />
-                        {str.stories.map((s, i) => (
-                            <div key={i}
-                                id={`modal-${idx}-${str.person}-${s.alt}`}
-                                className="iziModal"
-                                data-izimodal-group={`gp-${idx}-${str.person}`}
-                                style={{ maxHeight: '500px' }} />
-                        ))}
-                    </div>
-                ))}
-            </ScrollContainer>
-            <ThemeProvider theme={outerTheme}>
-                <Input
-                    onChange={(e) => props.setFilter(e.target.value)}
-                    style={st}
-                    size='small'
-                    placeholder='Search chat'
-                    className='searchat'
-                />
-            </ThemeProvider>
-        </div >
+
+        <ScrollContainer className=" storie-list scroll-container">
+            {storieList.map((str, idx) => (
+                <div key={idx}>
+                    <Storie str={str} id={idx} className='storie' openModal={() => openModal(idx, str)} />
+                    {str.stories.map((s, i) => (
+                        <div key={i}
+                            id={`modal-${idx}-${str.person}-${s.alt}`}
+                            className="iziModal"
+                            data-izimodal-group={`gp-${idx}-${str.person}`}
+                            style={{ maxHeight: '500px' }} />
+                    ))}
+                </div>
+            ))}
+        </ScrollContainer>
 
     )
 }

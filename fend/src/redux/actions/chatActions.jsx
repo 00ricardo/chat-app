@@ -1,50 +1,61 @@
 // Action Payload
 
 const fetchChatMessages = async (state) => {
-    if (state === 1) {
+    if (state === 0) {
         const messages = [
             {
-                user: 'Andreia Farinha',
-                msg: 'Olá Ricardo, tudo bem?',
+                user: 'Guest',
+                msg: 'Hello, how did you build this app?',
                 timestamp: '17:39'
             },
             {
                 user: 'Ricardo Silva',
-                msg: 'Olá, está tudo e contigo?',
-                timestamp: '17:39'
-            },
-            {
-                user: 'Andreia Farinha',
-                msg: 'Mais ou menos, estou cansada.',
+                msg: 'Hello, I build this app based on Tinnos Template!',
                 timestamp: '17:39'
             },
             {
                 user: 'Ricardo Silva',
-                msg: 'Descansa um pouco agora.',
+                msg: 'https://tinno.laborasyon.com/chat.html?demo=dark',
                 timestamp: '17:39'
             },
             {
-                user: 'Andreia Farinha',
-                msg: 'Sim, vou ver House of the Dragon agora.',
-                timestamp: '17:39'
-            },
-            {
-                user: 'Ricardo Silva',
-                msg: 'Viserys Targarian wins Emmy :V',
-                timestamp: '17:39'
-            },
-            {
-                user: 'Andreia Farinha',
-                msg: 'Good King though',
+                user: 'Guest',
+                msg: 'Did you use his code?',
                 timestamp: '17:39'
             },
             {
                 user: 'Ricardo Silva',
-                msg: 'Dracarysss',
+                msg: 'No, I just tried to clone his design, all the code was made by myself :)',
                 timestamp: '17:39'
-            }, {
-                user: 'Andreia Farinha',
-                msg: 'Good King though',
+            },
+            {
+                user: 'Guest',
+                msg: 'WOW! Impressive! Which technologies did you use?',
+                timestamp: '17:39'
+            },
+            {
+                user: 'Ricardo Silva',
+                msg: 'React and Material UI for the frontend with a pinch of Redux to help me to handle some global states!',
+                timestamp: '17:39'
+            },
+            {
+                user: 'Ricardo Silva',
+                msg: 'In the other hand, Im using NestJS (Node) with Firebase to handle all the server and the data :P',
+                timestamp: '17:39'
+            },
+            {
+                user: 'Guest',
+                msg: 'Why did you use these tecnologies?',
+                timestamp: '17:39'
+            },
+            {
+                user: 'Ricardo Silva',
+                msg: 'Im comfortable with these ones. ',
+                timestamp: '17:39'
+            },
+            {
+                user: 'Guest',
+                msg: 'Thank you ! 👐',
                 timestamp: '17:39'
             },
         ]

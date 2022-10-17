@@ -14,13 +14,16 @@ export const sectionSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(thunkSectionSelected.pending, (state) => {
-                state.section = 'Chats'
+
+                state.section = ''
+
             })
             .addCase(thunkSectionSelected.fulfilled, (state, action) => {
                 state.section = action.payload
+
             })
             .addCase(thunkSectionSelected.rejected, (state) => {
-                state.section = 'Chats'
+                state.section = ''
             })
     }
 })

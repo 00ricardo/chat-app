@@ -29,6 +29,7 @@
     "redux-thunk": "^2.4.1",
     "simple-react-lightbox": "^3.6.9-0",
     "styled-components": "^5.3.6",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
