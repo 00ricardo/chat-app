@@ -22,7 +22,7 @@ export default function ChatList(props) {
                 <List className='conversation-list' style={{ width: '100%', marginTop: '20px' }}>
                     {chatList.filter(cvst => (cvst.person.toLowerCase()).includes(props.filter.toLowerCase()))
                         .map((chat, idx) => (
-                            <Conversation chat={chat} id={idx} key={idx} className='conversation' />
+                            <Conversation chat={chat} id={chat.chatID} key={idx} className='conversation' />
                         ))}
                 </List>
                 : <Typography variant="h4" style={{ height: '-webkit-fill-available', display: 'flex', alignItems: 'center', justifyContent: 'center' }}  >

@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { thunkFetchChatList, resetState, thunkAddChatToList } from '../services/chatListServices';
 
 const initialState = {
-    chatList: [],
-    chat: {}
+    chatList: []
 }
 
 export const chatListSlice = createSlice({

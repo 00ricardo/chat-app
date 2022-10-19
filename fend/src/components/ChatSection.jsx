@@ -5,7 +5,7 @@ import { ReactSVG } from 'react-svg'
 import svg from '../public/svg.svg'
 import $ from 'jquery'
 import iziModal from 'izimodal/js/iziModal';
-import { thunkFetchConversation, thunkSetChatID } from '../redux/services/chatServices'
+import { thunkSetChatID } from '../redux/services/chatServices'
 import { thunkAddChatToList } from '../redux/services/chatListServices'
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -29,15 +29,14 @@ export default function ChatSection() {
         console.log(invitedUsers)
 
         dispatch(thunkSetChatID('fjmwnufusdfsdfh8smdfu'))
-        dispatch(thunkFetchConversation('fjmwnufusdfsdfh8smdfu'))
 
         //add chat to list with invited users
         dispatch(thunkAddChatToList(
             [...chatList, {
+                chatID: 'fjmwnufusdfsdfh8smdfu',
                 person: '',
                 last_message: '',
                 time: ''
-
             }]
         ))
     }
