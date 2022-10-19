@@ -3,18 +3,26 @@ import List from '@mui/material/List';
 import { Icon } from '@iconify/react';
 import logo from '../public/logo.png'
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ProfileSettings from './ProfileSettings';
-
+import NewChatSettings from './NewChatSettings';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkSectionSelected } from '../redux/services/sectionServices'
 
 export default function Sidebar() {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl2, setAnchorEl2] = React.useState(null);
     const open = Boolean(anchorEl);
+    const open2 = Boolean(anchorEl2);
+
+    const handleClick2 = (event) => {
+        setAnchorEl2(event.currentTarget);
+    };
+    const handleClose2 = () => {
+        setAnchorEl2(null);
+    };
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -43,8 +51,13 @@ export default function Sidebar() {
         left: '-10px'
     }
 
-    const selectedSection = (icon) => {
-        dispatch(thunkSectionSelected(icon))
+    const selectedSection = (e, icon) => {
+        if (icon !== 'NewChat') {
+            dispatch(thunkSectionSelected(icon))
+        } else {
+            handleClick2(e)
+        }
+
     }
 
     return (
@@ -57,14 +70,15 @@ export default function Sidebar() {
                 </div>
                 {Object.keys(firstList).map((icon, idx) => (
                     <div key={idx} className='iconsec'>
-                        <Button variant="text"
-                            onClick={() => selectedSection(icon)}
+                        <IconButton variant="text"
+                            onClick={(e) => selectedSection(e, icon)}
                             style={btnStyle}
                             className={section === icon && icon !== 'NewChat' ? 'active' : ''}>
                             {firstList[icon]}
-                        </Button>
+                        </IconButton>
                     </div>
                 ))}
+                <NewChatSettings anchorEl={anchorEl2} open={open2} handleClose={handleClose2} />
             </div>
             <List className='second-list' style={{ padding: 0 }}>
                 <div className='iconsec' style={{ position: 'relative', left: '-10px' }}>

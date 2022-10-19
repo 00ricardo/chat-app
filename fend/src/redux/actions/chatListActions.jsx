@@ -12,6 +12,12 @@ const fetchChatList = async () => {
     return conversations
 }
 
+
+const addChatToList = async (state) => {
+    return state
+}
+
 export {
-    fetchChatList
+    fetchChatList,
+    addChatToList
 }

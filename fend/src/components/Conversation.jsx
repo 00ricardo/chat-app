@@ -5,13 +5,13 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 
 import { useDispatch } from 'react-redux';
-import { thunkGetChatID, thunkFetchConversation } from '../redux/services/chatServices'
+import { thunkSetChatID, thunkFetchConversation } from '../redux/services/chatServices'
 
 export default function Conversation(props) {
     const dispatch = useDispatch()
 
     const openChat = (chatID) => {
-        dispatch(thunkGetChatID(chatID))
+        dispatch(thunkSetChatID(chatID))
         dispatch(thunkFetchConversation(chatID))
     }
 

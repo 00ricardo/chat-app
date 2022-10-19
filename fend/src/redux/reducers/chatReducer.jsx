@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { thunkFetchConversation, thunkSendMessage, resetState, thunkGetChatID } from '../services/chatServices';
+import { thunkFetchConversation, thunkSendMessage, resetState, thunkSetChatID } from '../services/chatServices';
 
 const initialState = {
-    chatID: 0,
+    chatID: null,
     messages: [],
 }
 
@@ -15,13 +15,13 @@ export const chatSlice = createSlice({
     extraReducers: (builder) => {
         builder
             //Chat itself
-            .addCase(thunkGetChatID.pending, (state) => {
+            .addCase(thunkSetChatID.pending, (state) => {
                 state.chatID = null
             })
-            .addCase(thunkGetChatID.fulfilled, (state, action) => {
+            .addCase(thunkSetChatID.fulfilled, (state, action) => {
                 state.chatID = action.payload
             })
-            .addCase(thunkGetChatID.rejected, (state) => {
+            .addCase(thunkSetChatID.rejected, (state) => {
                 state.chatID = null
             })
 
@@ -39,15 +39,12 @@ export const chatSlice = createSlice({
 
             //Messages
             .addCase(thunkSendMessage.pending, (state) => {
-                state.chatID = null
-                state.messages = []
+                //state.messages = []
             })
             .addCase(thunkSendMessage.fulfilled, (state, action) => {
-                state.chatID = action.payload.chatID
                 state.messages = action.payload.messages
             })
             .addCase(thunkSendMessage.rejected, (state) => {
-                state.chatID = null
                 state.messages = []
             })
     }

@@ -62,8 +62,6 @@ export default function StorieList(props) {
             let gp = modal.out.group
             let modalIndex = gp.ids.indexOf(outid)
 
-            console.log(modalIndex)
-
             indexToShow = modalIndex
             if (modalIndex + 2 === gp.ids.length) {
                 dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow })) // one more story viewed

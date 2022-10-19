@@ -4,13 +4,14 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-
 import { useSelector } from 'react-redux';
 
 export default function Chat() {
 
-    const { messages } = useSelector((state) => state.chat)
+    const { messages, chatID } = useSelector((state) => state.chat)
     const msgs = messages ? messages : []
+
+
 
     const [openModal, setOpenModal] = useState(false);
     const [imgOpenSrc, setImgOpenSrc] = useState('');
@@ -34,6 +35,10 @@ export default function Chat() {
         p: 4,
     };
 
+    useEffect(() => {
+        console.log('Abrir chat com ID: ', chatID)
+    }, [chatID])
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -43,7 +48,7 @@ export default function Chat() {
     }, [messages])
 
     return (
-        <div className='chat'>
+        <div className='chat animate__animated animate__fadeInDown animate__delay-0.5s'>
             <div id='messages' className='messages'>
                 {msgs.map((message, i) => (
                     <div key={i}>

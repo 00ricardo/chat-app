@@ -51,7 +51,7 @@ export default function NavbarChatSection() {
     }
 
     return (
-        <div className='navbar-chat-container'>
+        <div className='navbar-chat-container animate__animated animate__fadeInDown animate__delay-0.5s'>
             <div className='navbar-chat'>
                 <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
                     <Avatar alt='Ricardo Silva' src='/static/images/avatar/1.jpg' className='chat-avatar' />

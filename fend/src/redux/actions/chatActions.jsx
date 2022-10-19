@@ -69,12 +69,12 @@ const sendChatMessage = async (state) => {
     return state
 }
 
-const getChatID = async (state) => {
+const setChatID = async (state) => {
     return state
 }
 
 export {
     fetchChatMessages,
     sendChatMessage,
-    getChatID
+    setChatID
 }

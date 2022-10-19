@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { FETCH_CONVERSATION, SEND_MESSAGE, GET_CHAT_ID } from '../actions/triggers';
-import { fetchChatMessages, sendChatMessage, getChatID } from '../actions/chatActions';
+import { fetchChatMessages, sendChatMessage, setChatID } from '../actions/chatActions';
 
 export const resetState = createAsyncThunk(FETCH_CONVERSATION, async (state, thunkAPI) => {
     state.chatID = null
@@ -26,9 +26,9 @@ export const thunkSendMessage = createAsyncThunk(SEND_MESSAGE, async (state, thu
     }
 })
 
-export const thunkGetChatID = createAsyncThunk(GET_CHAT_ID, async (state, thunkAPI) => {
+export const thunkSetChatID = createAsyncThunk(GET_CHAT_ID, async (state, thunkAPI) => {
     try {
-        return await getChatID(state)
+        return await setChatID(state)
     } catch (error) {
         const message = 'error'
         return thunkAPI.rejectWithValue(message)

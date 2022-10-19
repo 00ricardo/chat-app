@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { thunkFetchChatList, resetState } from '../services/chatListServices';
+import { thunkFetchChatList, resetState, thunkAddChatToList } from '../services/chatListServices';
 
 const initialState = {
     chatList: [],
@@ -14,18 +14,31 @@ export const chatListSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            //Fetch Chat List
             .addCase(thunkFetchChatList.pending, (state) => {
                 state.chatList = []
-                state.chat = {}
+
             })
             .addCase(thunkFetchChatList.fulfilled, (state, action) => {
                 state.chatList = action.payload
-                state.chat = {}
             })
             .addCase(thunkFetchChatList.rejected, (state, action) => {
                 state.chatList = []
-                state.chat = {}
             })
+
+            //Add Chat to List
+            .addCase(thunkAddChatToList.pending, (state) => {
+                state.chatList = []
+
+            })
+            .addCase(thunkAddChatToList.fulfilled, (state, action) => {
+                state.chatList = action.payload
+            })
+            .addCase(thunkAddChatToList.rejected, (state, action) => {
+                state.chatList = []
+            })
+
     }
 })
 
