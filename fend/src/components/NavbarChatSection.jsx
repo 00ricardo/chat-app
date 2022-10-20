@@ -3,9 +3,11 @@ import Avatar from '@mui/material/Avatar';
 import { Icon } from '@iconify/react';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+import { useDispatch } from 'react-redux';
+import { thunkSetChatID } from '../redux/services/chatServices'
 
 export default function NavbarChatSection() {
-
+    const dispatch = useDispatch()
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             backgroundColor: '#44b700',
@@ -47,6 +49,29 @@ export default function NavbarChatSection() {
         camera: {
             icon: <Icon icon="bi:camera-video" width="30" />,
             background: '#fecb00'
+        },
+        close: {
+            icon: <Icon icon="ep:close-bold" width="30" />,
+            backgorund: '#fecb00',
+        }
+    }
+
+    const handleChatMenu = (opt) => {
+        switch (opt) {
+            case 'bell':
+
+                break;
+            case 'phone':
+
+                break;
+            case 'camera':
+
+                break;
+            case 'close':
+                dispatch(thunkSetChatID(null))
+                break;
+            default:
+                break;
         }
     }
 
@@ -64,7 +89,7 @@ export default function NavbarChatSection() {
             <div className='menu-chat'>
                 {Object.keys(menuItems).map((key, idx) => (
                     <div key={idx} className='menu-chat-item'>
-                        <Avatar key={idx} style={{ background: menuItems[key].background }}>
+                        <Avatar key={idx} style={{ background: menuItems[key].background, cursor: 'pointer' }} onClick={() => { handleChatMenu(key) }}>
                             {menuItems[key].icon}
                         </Avatar>
                     </div>

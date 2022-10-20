@@ -42,7 +42,12 @@ body,
 
 
 
-h3 {
+h3,
+h4,
+h5,
+h6,
+h7,
+h8 {
     margin: 0;
     color: var(--extra-light-grey);
 }
@@ -75,7 +80,7 @@ h3 {
 
 .storie-section-container {
     display: flex;
-    max-width: 480px;
+    max-width: 440px;
     flex-direction: column;
     margin-top: 30px;
     margin-left: 50px;
@@ -621,6 +626,7 @@ a[xlink|href] {
     border-radius: 50%;
     vertical-align: middle;
     -webkit-appearance: none;
+    appearance: none;
     outline: none;
     cursor: pointer;
 }
@@ -638,4 +644,19 @@ a[xlink|href] {
     max-height: 370px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
+}
+
+.css-1160xiw-MuiPaper-root-MuiDrawer-paper {
+    background-color: var(--light-grey) !important;
+}
+
+.divider-settings {
+    width: 100%;
+    background-color: var(--extra-light-grey);
+    height: 1px;
+}
+
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+    background-color: var(--red) !important;
+    opacity: 1;
 }

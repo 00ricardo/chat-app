@@ -5,8 +5,9 @@ import { ReactSVG } from 'react-svg'
 import svg from '../public/svg.svg'
 import $ from 'jquery'
 import iziModal from 'izimodal/js/iziModal';
-import { thunkSetChatID } from '../redux/services/chatServices'
+import { thunkSetChatID, thunkFetchConversation } from '../redux/services/chatServices'
 import { thunkAddChatToList } from '../redux/services/chatListServices'
+
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function ChatSection() {
@@ -39,6 +40,8 @@ export default function ChatSection() {
                 time: ''
             }]
         ))
+
+        dispatch(thunkFetchConversation('fjmwnufusdfsdfh8smdfu'))
     }
 
     const resetForm = () => {
@@ -73,7 +76,7 @@ export default function ChatSection() {
     }, [])
 
     useEffect(() => {
-        $('.checkbox-round').click((e) => {
+        $('.checkbox-round').on('click', (e) => {
             let usr = e.target.value
             if (invitedUsers.includes(usr) && !e.target.checked) {
                 const index = invitedUsers.indexOf(usr);

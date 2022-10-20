@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import List from '@mui/material/List';
 import { Icon } from '@iconify/react';
 import logo from '../public/logo.png'
@@ -6,23 +6,16 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ProfileSettings from './ProfileSettings';
-import NewChatSettings from './NewChatSettings';
+import $ from 'jquery'
+import iziModal from 'izimodal/js/iziModal';
+import PickUserToChat from './PickUserToChat';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkSectionSelected } from '../redux/services/sectionServices'
 
 export default function Sidebar() {
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [anchorEl2, setAnchorEl2] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const open2 = Boolean(anchorEl2);
-
-    const handleClick2 = (event) => {
-        setAnchorEl2(event.currentTarget);
-    };
-    const handleClose2 = () => {
-        setAnchorEl2(null);
-    };
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -30,6 +23,21 @@ export default function Sidebar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleNewChat = () => {
+        $.fn.iziModal = iziModal;
+        const modal = $('#modal-new-chat')
+        modal.iziModal('open')
+    }
+
+    useEffect(() => {
+        const modalNewChat = $('#modal-new-chat')
+        modalNewChat.iziModal({
+            title: 'New Chat',
+            background: '#404144',
+            headerColor: 'transparent',
+        });
+    })
 
     const { section } = useSelector((state) => state.sidebar)
     const dispatch = useDispatch()
@@ -54,10 +62,10 @@ export default function Sidebar() {
     const selectedSection = (e, icon) => {
         if (icon !== 'NewChat') {
             dispatch(thunkSectionSelected(icon))
-        } else {
-            handleClick2(e)
-        }
 
+        } else {
+            handleNewChat()
+        }
     }
 
     return (
@@ -78,7 +86,12 @@ export default function Sidebar() {
                         </IconButton>
                     </div>
                 ))}
-                <NewChatSettings anchorEl={anchorEl2} open={open2} handleClose={handleClose2} />
+            </div>
+            <div
+                id='modal-new-chat'
+                className="iziModal"
+                style={{ maxHeight: '500px', minWidth: '400px' }}>
+                <PickUserToChat />
             </div>
             <List className='second-list' style={{ padding: 0 }}>
                 <div className='iconsec' style={{ position: 'relative', left: '-10px' }}>
