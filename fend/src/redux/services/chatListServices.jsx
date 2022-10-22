@@ -7,7 +7,7 @@ export const resetState = createAsyncThunk(FETCH_CHAT_LIST, async (state, thunkA
     state.chat = {}
 })
 
-export const thunkFetchChatList = createAsyncThunk(FETCH_CHAT_LIST, async (thunkAPI) => {
+export const thunkFetchChatList = createAsyncThunk(FETCH_CHAT_LIST, async (state, thunkAPI) => {
     try {
         return await fetchChatList()
     } catch (error) {

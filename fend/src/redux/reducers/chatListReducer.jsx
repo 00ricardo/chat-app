@@ -17,7 +17,6 @@ export const chatListSlice = createSlice({
             //Fetch Chat List
             .addCase(thunkFetchChatList.pending, (state) => {
                 state.chatList = []
-
             })
             .addCase(thunkFetchChatList.fulfilled, (state, action) => {
                 state.chatList = action.payload

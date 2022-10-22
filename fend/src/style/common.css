@@ -530,7 +530,8 @@ circle {
     }
 }
 
-.css-z2of7l-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+.css-z2of7l-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper,
+.css-1fmncj {
     color: var(--username) !important;
     background-color: var(--light-grey) !important;
     width: 18%;
@@ -635,18 +636,14 @@ a[xlink|href] {
     background-color: var(--red);
 }
 
-/*.iziModal-wrap {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}*/
-
 .lst-utp {
     max-height: 370px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
 }
 
-.css-1160xiw-MuiPaper-root-MuiDrawer-paper {
+.css-1160xiw-MuiPaper-root-MuiDrawer-paper,
+.css-1ab2xsx {
     background-color: var(--light-grey) !important;
 }
 
@@ -656,7 +653,8 @@ a[xlink|href] {
     height: 1px;
 }
 
-.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track,
+.css-1nr2wod.Mui-checked+.MuiSwitch-track {
     background-color: var(--red) !important;
     opacity: 1;
 }
