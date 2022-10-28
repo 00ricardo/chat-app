@@ -39,7 +39,6 @@ export default function Chat() {
         console.log('Abrir chat com ID: ', chatID)
     }, [chatID])
 
-
     useEffect(() => {
         setTimeout(() => {
             const lastMessage = document.getElementById('messages')

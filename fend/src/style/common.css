@@ -658,3 +658,9 @@ a[xlink|href] {
     background-color: var(--red) !important;
     opacity: 1;
 }
+
+#attribution_block,
+.attribution {
+    display: none !important;
+    background-color: #40d11f !important;
+}

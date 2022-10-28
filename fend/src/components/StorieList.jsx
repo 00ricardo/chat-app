@@ -7,7 +7,6 @@ import $ from 'jquery'
 import iziModal from 'izimodal/js/iziModal';
 
 export default function StorieList(props) {
-
     const { storieList } = useSelector((state) => state.stories)
     const dispatch = useDispatch()
 
@@ -15,8 +14,10 @@ export default function StorieList(props) {
         dispatch(thunkFetchStorieList())
     }, [dispatch])
 
+
     const openModal = async (id, str) => {
         let name = str.person
+        let indexToShow = 0
 
         $.fn.iziModal = iziModal;
 
@@ -32,52 +33,50 @@ export default function StorieList(props) {
                 pauseOnHover: true
             });
 
+            //photo modal-2-PedroSantos-bear_photo do grupo  gp-2-PedroSantos
+
             $(`#modal-${id}-${name}-${s.alt}`).iziModal('setContent',
                 `<div class='kilo'> 
                     <img class='strphotostr' src=${s.img} alt=${s.alt}></img>
                 </div>`
             );
+
+            $(document).on('opening', `#modal-${id}-${name}-${s.alt}`, function (e) {
+                var pht = e.currentTarget.id
+                var info = pht.split('-')
+                var uid = info[1]
+                var salt = info[3]
+                const sid = storieList[uid].stories.indexOf(s)
+
+                if (s.alt === salt) {
+                    //set vision to current story
+                    dispatch(thunkSetStoryVision({ userID: uid, storyID: sid }))
+                    if (sid === storieList[uid].stories.length - 1) {
+                        //set vision to storie group
+                        dispatch(thunkSetUserStoryVision({ userID: uid }))
+                    }
+                }
+            });
         })
 
-        var indexToShow = 0
+
         var array = storieList[id].stories
         for (let index = 0; index < array.length; index++) {
             var _str = array[index];
             if (!storieList[id].viewed) {
                 if (!_str.viewed) {
                     if (index === array.length - 1) {
-                        dispatch(thunkSetUserStoryVision({ userID: id }))
                         indexToShow = 0
                     }
                     indexToShow = index
-                    dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow }))
                     break
                 }
             }
         }
 
-
-        $(document).on('iziModal-group-change', function (e, modal) {
-            let outid = modal.out.id
-            let gp = modal.out.group
-            let modalIndex = gp.ids.indexOf(outid)
-
-            indexToShow = modalIndex
-            if (modalIndex + 2 === gp.ids.length) {
-                dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow })) // one more story viewed
-                dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow + 1 })) //last story -> force to 
-                dispatch(thunkSetUserStoryVision({ userID: id })) //complete proccess
-                indexToShow = 0
-            } else {
-                dispatch(thunkSetStoryVision({ userID: id, storyID: indexToShow })) // one more story viewed
-            }
-        });
-
         $(`#modal-${id}-${name}-${str.stories[indexToShow].alt}`).iziModal('open')
 
     }
-
-
 
     return (
 

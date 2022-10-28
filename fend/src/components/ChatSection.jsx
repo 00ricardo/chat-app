@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import NavbarChatSection from './NavbarChatSection'
 import Chat from './Chat'
 import { ReactSVG } from 'react-svg'
+import Lottie from 'react-lottie-player'
 import svg from '../public/svg.svg'
 import $ from 'jquery'
 import iziModal from 'izimodal/js/iziModal';
